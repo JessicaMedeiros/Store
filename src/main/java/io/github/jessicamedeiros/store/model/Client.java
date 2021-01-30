@@ -1,6 +1,7 @@
 package io.github.jessicamedeiros.store.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.jessicamedeiros.store.enums.ClientType;
 import io.github.jessicamedeiros.store.model.payment.Order;
@@ -22,7 +23,6 @@ public class Client implements Serializable {
     private Integer type;
 
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class Client implements Serializable {
     @CollectionTable(name = "telephone")
     private Set<String> telephone = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 

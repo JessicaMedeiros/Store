@@ -4,6 +4,7 @@ package io.github.jessicamedeiros.store.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,10 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
     @Column
     private String name;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "categories")
     private List<Product> products = new ArrayList<>();
 
@@ -32,9 +33,6 @@ public class Category implements Serializable {
     public void setProdutos(List<Product> products) {
         this.products = products;
     }
-
-
-
 
 
     public Category(){
@@ -54,11 +52,11 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
