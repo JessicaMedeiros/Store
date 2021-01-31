@@ -2,7 +2,6 @@ package io.github.jessicamedeiros.store.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.jessicamedeiros.store.model.payment.Order;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
