@@ -23,7 +23,8 @@ public class Client implements Serializable {
     private Integer type;
 
 
-    @OneToMany(mappedBy = "client")
+    //Toda a operação de Client vai ser sentida por Address
+    @OneToMany(mappedBy = "client", cascade=CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
     @ElementCollection
@@ -43,7 +44,7 @@ public class Client implements Serializable {
         this.name = name;
         this.email = email;
         this.cpfORcnpj = cpfORcnpj;
-        this.type = type.getCod();
+        this.type = (type==null) ? null : type.getCod();
     }
 
     public Integer getId() {
