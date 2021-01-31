@@ -2,6 +2,7 @@ package io.github.jessicamedeiros.store.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.jessicamedeiros.store.model.payment.Order;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
@@ -19,8 +20,8 @@ public class LineItem implements Serializable {
     private LineItemPK id = new LineItemPK();
 
     private Double discount;
-    private Integer quantidade;
-    private Double preco;
+    private Integer quantity;
+    private Double price;
 
 
     public LineItem(){
@@ -29,13 +30,16 @@ public class LineItem implements Serializable {
 
     //Nao faz sentido colcoar o lineitempk no construtor. Visto que o que a gente quer com ele é associar
     //product e order no lineitem
-    public LineItem(Order order, Product product, Double discount, Integer quantidade, Double preco) {
+    public LineItem(Order order, Product product, Double discount, Integer quantity, Double price) {
         this.id = id;
         id.setOrder(order);
         id.setProduct(product);
         this.discount = discount;
-        this.quantidade = quantidade;
-        this.preco = preco;
+        this.quantity = quantity;
+        this.price = price;
+    }
+    public double getSubTotal(){ //colocando o get na frente pra ser automaticamente serializado pelo Json
+        return (price - discount) * quantity;
     }
 
     @JsonIgnore
@@ -43,10 +47,17 @@ public class LineItem implements Serializable {
         return id.getOrder();
     }
 
+    public void setOrder(Order order){
+        id.setOrder(order);
+    }
+
     public Product getProduct(){
         return id.getProduct();
     }
 
+    public void setProduct(Product product){
+        id.setProduct(product);
+    }
 
     public LineItemPK getId() {
         return id;
@@ -56,12 +67,24 @@ public class LineItem implements Serializable {
         return discount;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
-    public Double getPreco() {
-        return preco;
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override

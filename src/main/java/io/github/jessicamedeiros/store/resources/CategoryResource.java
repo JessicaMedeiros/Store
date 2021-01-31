@@ -75,9 +75,4 @@ public class CategoryResource {
                 new CategoryDTO(obj));
         return ResponseEntity.ok().body(listDTO);
     }
-
-
-
-
-
 }

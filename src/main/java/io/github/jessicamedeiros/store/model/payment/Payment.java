@@ -1,6 +1,7 @@
 package io.github.jessicamedeiros.store.model.payment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.jessicamedeiros.store.enums.PaymentStatus;
 
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public class Payment implements Serializable {
     private static final long serialVersionUID = 1l;
 

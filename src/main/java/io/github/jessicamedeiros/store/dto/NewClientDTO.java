@@ -1,11 +1,13 @@
 package io.github.jessicamedeiros.store.dto;
 
+import io.github.jessicamedeiros.store.service.validation.ClientCreate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientCreate
 public class NewClientDTO implements Serializable {
     private static final long serialVersionUID = 1l;
 
